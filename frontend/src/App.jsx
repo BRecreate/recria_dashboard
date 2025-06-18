@@ -247,7 +247,7 @@ function App() {
                     <AreaChart data={trends?.daily_contacts || []}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="date" />
-                      <YAxis />
+                      <YAxis allowDecimals={false}/>
                       <Tooltip />
                       <Area type="monotone" dataKey="contacts" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
                     </AreaChart>
@@ -266,7 +266,7 @@ function App() {
                     <BarChart data={trends?.peak_hours || []}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="hour" />
-                      <YAxis />
+                      <YAxis allowDecimals={false}/>
                       <Tooltip />
                       <Bar dataKey="interactions" fill="#0088FE" />
                     </BarChart>
@@ -286,7 +286,7 @@ function App() {
                   <LineChart data={trends?.meeting_trends || []}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis />
+                    <YAxis allowDecimals={false}/>
                     <Tooltip />
                     <Line type="monotone" dataKey="scheduled" stroke="#00C49F" strokeWidth={2} name="Agendadas" />
                     <Line type="monotone" dataKey="rescheduled" stroke="#FFBB28" strokeWidth={2} name="Reagendadas" />
