@@ -352,7 +352,7 @@ function App() {
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={performance?.top_topics || []} layout="horizontal">
+                    <BarChart data={performance?.top_topics || []}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis type="number" />
                       <YAxis dataKey="topic" type="category" width={120} />
