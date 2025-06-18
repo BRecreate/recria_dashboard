@@ -31,32 +31,15 @@ if (!GOOGLE_CALENDAR_ID) {
 
 // Carregando as credenciais do arquivo crentials.json
 let credentials;
-
 try {
-  credentials = {
-    type: {GOOGLE_TYPE},
-    project_id: {GOOGLE_PROJECT_ID},
-    private_key_id: {GOOGLE_PRIVATE_KEY_ID},
-    private_key: {GOOGLE_PRIVATE_KEY},
-    client_email: {GOOGLE_CLIENT_EMAIL},
-    client_id: {GOOGLE_CLIENT_ID},
-    auth_uri: {GOOGLE_AUTH_URI},
-    token_uri: {GOOGLE_TOKEN_URI},
-    auth_provider_x509_cert_url: {GOOGLE_AUTH_PROVIDER_CERT_URL},
-    client_x509_cert_url: {GOOGLE_CLIENT_CERT_URL},
-  };
-
-  // Verifica se todas as variáveis estão presentes
-  if (Object.values(credentials).some(v => !v)) {
-    throw new Error("Alguma variável de ambiente está faltando");
-  }
-
-  console.log("✅ Credenciais do Google carregadas com sucesso a partir das variáveis de ambiente");
+  credentials = require("./credentials.json");
+  console.log("✅ Credenciais do Google carregadas com sucesso");
 } catch (error) {
-  console.error("❌ Erro ao carregar credenciais do Google a partir das variáveis de ambiente:");
-  console.error(error.message);
+  console.error("❌ Arquivo credentials.json não encontrado ou inválido");
+  console.error("📋 Certifique-se de que o arquivo credentials.json está presente no diretório raiz");
   process.exit(1);
 }
+
 const auth = new google.auth.GoogleAuth({
   credentials,
   scopes: [
