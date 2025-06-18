@@ -1,0 +1,31 @@
+{
+  "name": "dashboard-agente-ia",
+  "version": "2.0.0",
+  "description": "Dashboard para monitoramento de métricas do Agente de IA - Versão Completa",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dashboard",
+    "agente-ia",
+    "n8n",
+    "google-sheets",
+    "google-calendar",
+    "whatsapp",
+    "analytics"
+  ],
+  "author": "Manus AI",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "google-spreadsheet": "^4.1.4",
+    "googleapis": "^144.0.0",
+    "moment": "^2.30.1"
+  }
+}
+
