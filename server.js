@@ -30,23 +30,33 @@ if (!GOOGLE_CALENDAR_ID) {
 }
 
 // Carregando as credenciais do arquivo crentials.json
- let credentials;
- try {
-  if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
-  credentials =
-  JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
-  console.log("✅ Credenciais do Google carregadas da variável de ambiente");
-  } else {
-  // Fallback para arquivo local em desenvolvimento
-  credentials = require("./credentials.json");
-  console.log("✅ Credenciais do Google carregadas do arquivo local");
+let credentials;
+
+try {
+  credentials = {
+    type: process.env.GOOGLE_TYPE,
+    project_id: process.env.GOOGLE_PROJECT_ID,
+    private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
+    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    auth_uri: process.env.GOOGLE_AUTH_URI,
+    token_uri: process.env.GOOGLE_TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL,
+    client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL,
+  };
+
+  // Verifica se todas as variáveis estão presentes
+  if (Object.values(credentials).some(v => !v)) {
+    throw new Error("Alguma variável de ambiente está faltando");
   }
- } catch (error) {
- console.error("❌ Erro ao carregar credenciais do Google:",
- error.message);
- console.error("📋 Certifique-se de que as credenciais estão configuradas corretamente (variável de ambiente ou credentials.json)");
-process.exit(1);
- }
+
+  console.log("✅ Credenciais do Google carregadas com sucesso a partir das variáveis de ambiente");
+} catch (error) {
+  console.error("❌ Erro ao carregar credenciais do Google a partir das variáveis de ambiente:");
+  console.error(error.message);
+  process.exit(1);
+}
 const auth = new google.auth.GoogleAuth({
   credentials,
   scopes: [
