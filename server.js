@@ -34,16 +34,16 @@ let credentials;
 
 try {
   credentials = {
-    type: process.env.GOOGLE_TYPE,
-    project_id: process.env.GOOGLE_PROJECT_ID,
-    private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-    private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    client_id: process.env.GOOGLE_CLIENT_ID,
-    auth_uri: process.env.GOOGLE_AUTH_URI,
-    token_uri: process.env.GOOGLE_TOKEN_URI,
-    auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL,
-    client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL,
+    type: {GOOGLE_TYPE},
+    project_id: {GOOGLE_PROJECT_ID},
+    private_key_id: {GOOGLE_PRIVATE_KEY_ID},
+    private_key: {GOOGLE_PRIVATE_KEY},
+    client_email: {GOOGLE_CLIENT_EMAIL},
+    client_id: {GOOGLE_CLIENT_ID},
+    auth_uri: {GOOGLE_AUTH_URI},
+    token_uri: {GOOGLE_TOKEN_URI},
+    auth_provider_x509_cert_url: {GOOGLE_AUTH_PROVIDER_CERT_URL},
+    client_x509_cert_url: {GOOGLE_CLIENT_CERT_URL},
   };
 
   // Verifica se todas as variáveis estão presentes
