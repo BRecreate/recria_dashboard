@@ -30,16 +30,23 @@ if (!GOOGLE_CALENDAR_ID) {
 }
 
 // Carregando as credenciais do arquivo crentials.json
-let credentials;
-try {
+ let credentials;
+ try {
+  if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
+  credentials =
+  JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+  console.log("✅ Credenciais do Google carregadas da variável de ambiente");
+  } else {
+  // Fallback para arquivo local em desenvolvimento
   credentials = require("./credentials.json");
-  console.log("✅ Credenciais do Google carregadas com sucesso");
-} catch (error) {
-  console.error("❌ Arquivo credentials.json não encontrado ou inválido");
-  console.error("📋 Certifique-se de que o arquivo credentials.json está presente no diretório raiz");
-  process.exit(1);
-}
-
+  console.log("✅ Credenciais do Google carregadas do arquivo local");
+  }
+ } catch (error) {
+ console.error("❌ Erro ao carregar credenciais do Google:",
+ error.message);
+ console.error("📋 Certifique-se de que as credenciais estão configuradas corretamente (variável de ambiente ou credentials.json)");
+process.exit(1);
+ }
 const auth = new google.auth.GoogleAuth({
   credentials,
   scopes: [
