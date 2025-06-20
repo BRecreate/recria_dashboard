@@ -143,7 +143,7 @@ app.get("/api/dashboard/stats", asyncHandler(async (req, res) => {
 const startOfMonth = moment().startOf('month');
 const endOfMonth = moment().endOf('month');
 const newClients = contacts.filter(c => 
-  c.criado_em && moment(c.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']).isBetween(startOfMonth, endOfMonth, undefined, '[]')
+  c.criado_em && moment(c.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']).isBetween(startOfMonth, endOfMonth, undefined, '[]')
 ).length;
   const returningClients = Math.max(0, totalClients - newClients);
 
@@ -219,7 +219,7 @@ app.get("/api/dashboard/trends", asyncHandler(async (req, res) => {
   contacts.forEach((contact) => {
     if (contact.criado_em) {
       // Normalizar formato de data
-      const date = moment(contact.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']).format('YYYY-MM-DD');
+      const date = moment(contact.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']).format('YYYY-MM-DD');
       if (moment(date).isValid()) {
         contactsByDate[date] = (contactsByDate[date] || 0) + 1;
       }
@@ -284,12 +284,12 @@ app.get("/api/dashboard/recent-clients", asyncHandler(async (req, res) => {
 
   // Filtrar contatos com data válida e ordenar por data de criação
   const validContacts = contacts.filter(contact => 
-    contact.criado_em && moment(contact.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']).isValid()
+    contact.criado_em && moment(contact.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']).isValid()
   );
 
   const sortedContacts = validContacts.sort((a, b) => {
-    const dateA = moment(a.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']);
-    const dateB = moment(b.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']);
+    const dateA = moment(a.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']);
+    const dateB = moment(b.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']);
     return dateB.valueOf() - dateA.valueOf();
   });
 
@@ -299,7 +299,7 @@ app.get("/api/dashboard/recent-clients", asyncHandler(async (req, res) => {
     email_contato: contact.email_contato || contact.email_contato || "",
     telefone_wpp: contact.telefone_wpp || "",
     interesse_principal: contact.interesse_principal || "Não especificado",
-    criado_em: moment(contact.criado_em, ['YYYY-MM-DD', 'DD/MM/YYYY','MM/DD/YYYY']).format('DD/MM/YYYY'),
+    criado_em: moment(contact.criado_em, ['YYYY-MM-DD','MM/DD/YYYY']).format('DD/MM/YYYY'),
     total_mensagens: parseInt(contact.total_mensagens) || 0,
     status_lead: contact.status_lead || "em_qualificacao",
   }));
