@@ -268,7 +268,7 @@ function formatDateBR(dateStr) {
                   <ResponsiveContainer width="100%" height={300}>
                     <AreaChart data={trends?.daily_contacts || []}>
                       <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="date" tickFormatter={formatDateBR}/>
+                      <XAxis dataKey="date" tick={false}/>
                       <YAxis allowDecimals={false}/>
                       <Tooltip />
                       <Area type="monotone" dataKey="contacts" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
