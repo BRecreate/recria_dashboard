@@ -354,7 +354,7 @@ function App() {
                   <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={performance?.top_topics || []}>
                       <CartesianGrid strokeDasharray="3 3" />
-                      <YAxis type="number" />
+                      <YAxis type="number" allowDecimals={false}/>
                       <XAxis dataKey="topic" type="category" width={120} />
                       <Tooltip />
                       <Bar dataKey="count" fill="#8884d8" />
