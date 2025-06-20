@@ -436,7 +436,7 @@ function formatDateBR(dateStr) {
                               client.status_lead === 'nao_qualificado' ? 'destructive' : 'secondary'
                             }
                           >
-                            {client.status_lead?.replace('_', ' ')}
+                            {traduzirStatusLead(client.status_lead)}
                           </Badge>
                           <p className="text-xs text-muted-foreground mt-1">
                             {client.total_mensagens} mensagens
