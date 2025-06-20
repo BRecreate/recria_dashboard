@@ -61,6 +61,14 @@ function App() {
       setLoading(false)
     }
   }
+function formatDateBR(dateStr) {
+  if (!dateStr) return ''
+  const [year, month, day] = dateStr.split('-').length === 3
+    ? dateStr.split('-')
+    : dateStr.split('/'); // cobre ambos formatos
+  return `${day}/${month}/${year}`
+}
+
 
   useEffect(() => {
     fetchData()
@@ -246,7 +254,7 @@ function App() {
                   <ResponsiveContainer width="100%" height={300}>
                     <AreaChart data={trends?.daily_contacts || []}>
                       <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="date" />
+                      <XAxis dataKey="date" tickFormatter={formatDateBR}/>
                       <YAxis allowDecimals={false}/>
                       <Tooltip />
                       <Area type="monotone" dataKey="contacts" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
@@ -254,7 +262,7 @@ function App() {
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
-
+              
               {/* Horários de Pico */}
               <Card>
                 <CardHeader>
@@ -285,7 +293,7 @@ function App() {
                 <ResponsiveContainer width="100%" height={400}>
                   <LineChart data={trends?.meeting_trends || []}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
+                    <XAxis dataKey="date" tickFormatter={formatDateBR}/>
                     <YAxis allowDecimals={false}/>
                     <Tooltip />
                     <Line type="monotone" dataKey="scheduled" stroke="#00C49F" strokeWidth={2} name="Agendadas" />
