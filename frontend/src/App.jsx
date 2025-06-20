@@ -61,6 +61,20 @@ function App() {
       setLoading(false)
     }
   }
+
+function traduzirStatusLead(status) {
+  switch (status) {
+    case 'qualificado':
+      return 'Qualificado'
+    case 'nao_qualificado':
+      return 'Não qualificado'
+    case 'em_qualificacao':
+      return 'Em qualificação'
+    default:
+      // Capitaliza e substitui underline por espaço, caso não esteja no switch
+      return status ? status.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) : ''
+}
+}
 function formatDateBR(dateStr) {
   if (!dateStr) return ''
   const [year, month, day] = dateStr.split('-').length === 3
@@ -342,7 +356,7 @@ function formatDateBR(dateStr) {
                   <div className="space-y-2">
                     {(performance?.lead_status || []).map((item, index) => (
                       <div key={index} className="flex justify-between items-center">
-                        <span className="text-sm capitalize">{item.status.replace('_', ' ')}</span>
+                        <span className="text-sm capitalize">{traduzirStatusLead(item.status)}</span>
                         <Badge variant="outline">{item.count}</Badge>
                       </div>
                     ))}
