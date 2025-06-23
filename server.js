@@ -188,7 +188,7 @@ const newClients = contacts.filter(c =>
     c.status_lead && c.status_lead.toLowerCase() === "qualificado"
   ).length;
   const leadToMeetingRate = qualifiedLeads > 0 ? 
-    parseFloat((scheduledMeetings / qualifiedLeads * 100).toFixed(1)) : 0;
+    parseFloat((qualifiedLeads / totalClients * 100).toFixed(1)) : 0;
 
   // Conversão para formato de lista para o frontend
   const interestsList = Object.entries(interests)
