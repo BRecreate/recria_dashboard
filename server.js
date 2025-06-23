@@ -262,9 +262,11 @@ app.get("/api/dashboard/trends", asyncHandler(async (req, res) => {
   const hourlyInteractions = {};
   events.forEach(event => {
     if (event.start && event.start.dateTime) {
-      const hour = moment(event.start.dateTime).format('HH:00');
+      const date = new Date(event.start.dateTime);
+      date.setHours(date.getHours() - 3); // Subtrai 3 horas
+      const hour = moment(date).format('HH:00');
       hourlyInteractions[hour] = (hourlyInteractions[hour] || 0) + 1;
-    }
+  }
   });
 
   const peakHours = Object.entries(hourlyInteractions)
